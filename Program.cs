@@ -1,46 +1,16 @@
-﻿//Hashtable
+﻿//HashSet
 /*
-🔹 What is a Hashtable?
+What is a HashSet<T>?
 
-A non-generic collection (from the old System.Collections namespace).
+A collection of unique values (no duplicates).
 
-Stores key-value pairs like Dictionary, but:
+Belongs to System.Collections.Generic.
 
-Keys and values are of type object (so you need casting).
+Uses a hash table internally for fast lookups, insertions, and deletions (O(1) average).
 
-Not type-safe compared to Dictionary<TKey,TValue>.
+Does not maintain order.
 
-Automatically resizes as elements are added.
-
-Provides fast lookups (O(1) average) using a hash function.
-
-🔹 Common Properties
-
-Count → number of elements.
-
-IsReadOnly, IsFixedSize → check if you can modify it.
-
-IsSynchronized → tells if thread-safe (not by default).
-
-Keys → returns all keys.
-
-Values → returns all values.
-
-🔹 Common Methods
-
-Add(key, value) → add new item.
-
-Remove(key) → remove item by key.
-
-ContainsKey(key) → check if key exists.
-
-ContainsValue(value) → check if value exists.
-
-Clear() → remove all items.
-
-Clone() → shallow copy.
-
-Indexer (myHashtable[key]) → get or set value by key. 
+Think of it as a mathematical set → you can do unions, intersections, differences.
 */
 using System.Collections;
 
@@ -48,27 +18,35 @@ class Program
 {
     static void Main(string[] args)
     {
-        Hashtable ht = new Hashtable();
-
+        // Create a HashSet of strings
+        HashSet<string> names = new HashSet<string>();
         // Add elements
-        ht.Add(1, "Montassar");
-        ht.Add(2, "Ben");
-        ht.Add(3, "Brahim");
-
-        // Access elements
-        Console.WriteLine(ht[1]); // Montassar
-
-        // Check existence
-        Console.WriteLine(ht.ContainsKey(2));   // True
-        Console.WriteLine(ht.ContainsValue("Ben")); // True
-
-        // Remove element
-        ht.Remove(3);
-
-        // Iterate
-        foreach (DictionaryEntry entry in ht)
+        names.Add("Alice");
+        names.Add("Bob");
+        names.Add("Charlie");
+        names.Add("Alice"); // Duplicate, will be ignored
+        // Check if an element exists
+        Console.WriteLine(names.Contains("Bob")); // True
+        // Remove an element
+        names.Remove("Charlie");
+        // Iterate over elements
+        foreach (var name in names)
         {
-            Console.WriteLine($"{entry.Key} : {entry.Value}");
+            Console.WriteLine(name);
         }
+        // Set operations
+        HashSet<string> otherNames = new HashSet<string> { "Bob", "David" };
+        names.UnionWith(otherNames); // Union
+        names.IntersectWith(otherNames); // Intersection
+        names.ExceptWith(otherNames); // Difference
+        Console.WriteLine("After set operations:");
+        foreach (var name in names)
+        {
+            Console.WriteLine(name);
+        }
+        // Count of elements
+        Console.WriteLine($"Count: {names.Count}");
+        // Clear all elements
+        names.Clear();
     }
 }

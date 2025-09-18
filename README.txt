@@ -1,17 +1,48 @@
-﻿When to Use Hashtable in Web Applications
+﻿🔹 Common Properties
 
-⚠️ Nowadays, rarely used → replaced by Dictionary<TKey, TValue> (type-safe, faster, generic).
+Count → number of elements.
 
-Might still appear in:
+Comparer → how equality is checked (default = EqualityComparer<T>.Default).
 
-Legacy .NET applications (pre-2.0).
+IsSubsetOf, IsSupersetOf → relationship checks between sets.
 
-When you don’t know key/value types at compile time (very dynamic data).
+🔹 Common Methods
 
-Example: storing HTTP headers or session variables dynamically (but today Dictionary is preferred).
+Add(item) → adds an element if not already present (returns true/false).
 
-👉 In modern web apps, I’d recommend:
+Remove(item) → removes element.
 
-Use Dictionary<TKey, TValue> instead of Hashtable.
+Contains(item) → check if exists.
 
-Only use Hashtable if you’re maintaining old legacy code.
+Clear() → remove all items.
+
+UnionWith(collection) → combines sets (A ∪ B).
+
+IntersectWith(collection) → keeps only common elements (A ∩ B).
+
+ExceptWith(collection) → removes elements found in another set (A – B).
+
+SymmetricExceptWith(collection) → keeps elements unique to each set (A ⊕ B).
+
+
+🔹 When to Use HashSet<T> in Web Applications
+
+Ensure uniqueness
+
+Storing unique usernames, emails, product IDs before inserting into DB.
+
+Preventing duplicate API requests or form submissions.
+
+Fast existence checks
+
+Checking if a user already liked a post.
+
+Validating if an item is already in a shopping cart.
+
+Set operations for recommendations
+
+Finding common friends (IntersectWith).
+
+Suggesting items → products a user hasn’t bought (ExceptWith).
+
+Combining multiple result sets (UnionWith).
