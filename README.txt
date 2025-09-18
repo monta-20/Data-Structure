@@ -1,27 +1,13 @@
-﻿🔹 Common Properties
+﻿🔹 When to Use Tuple in Web Applications
 
-Count → number of elements.
+Return multiple values from a method
 
-Min → smallest element.
+Example: Return both statusCode and responseMessage from a web API call.
 
-Max → largest element.
+Group related data without creating a class
 
-Comparer → how elements are sorted.
+Example: Returning (userId, userName, email) from a login method.
 
-🔹 Common Methods
+Temporary data structures
 
-Add(item) → adds if not already present (returns true/false).
-
-Remove(item) → removes an element.
-
-Contains(item) → check if exists.
-
-Clear() → remove all items.
-
-UnionWith(collection) → combine sets.
-
-IntersectWith(collection) → keep common elements.
-
-ExceptWith(collection) → remove items found in another set.
-
-GetViewBetween(min, max) → returns a subset within a range.
+Example: Passing a small set of grouped values between layers in a web app.

@@ -1,14 +1,16 @@
-﻿//SortedSet
+﻿//Tuple
 /*
-A collection of unique elements (no duplicates, like HashSet<T>).
+A data structure that holds a fixed number of items (can be different types).
 
-But unlike HashSet, it keeps items in sorted order automatically.
+Belongs to System.
 
-Uses a balanced binary search tree internally → operations are O(log n).
+Immutable → once created, you can’t change its values.
 
-Belongs to System.Collections.Generic.
+Supports up to 8 items (Tuple<T1, T2, ..., T7, TRest>).
 
-Think of it as: HashSet + automatic sorting.
+Introduced before ValueTuple (C# 7.0), which is lighter and more common today.
+
+👉 Think of it like a container for grouping values without creating a class.
 */
 using System.Collections;
 
@@ -16,32 +18,23 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Create a SortedSet of integers
-        SortedSet<int> numbers = new SortedSet<int>();
-        // Add elements 
-        numbers.Add(1);
-        numbers.Add(3);
-        numbers.Add(2);
-        numbers.Add(2); // Duplicate, won't be added
-        // Display elements (will be in sorted order)
-        Console.WriteLine("SortedSet elements:");
-        foreach (var num in numbers)
-        {
-            Console.WriteLine(num); // Output: 1, 2, 3
-        }
-        // Check for existence
-        Console.WriteLine($"Contains 2? {numbers.Contains(2)}"); // True
-        Console.WriteLine($"Contains 4? {numbers.Contains(4)}"); // False
-        // Remove an element
-        numbers.Remove(2);
-        Console.WriteLine("After removing 2:");
-        foreach (var num in numbers)
-        {
-            Console.WriteLine(num); // Output: 1, 3
-        }
-        // Count of elements
-        Console.WriteLine($"Count: {numbers.Count}"); // 2
-        // Clear all elements
-        numbers.Clear();
+        // Create a tuple using constructor
+        Tuple<int, string, bool> person = new Tuple<int, string, bool>(1, "Alice", true);
+        // Create a tuple using Create method
+        var person2 = Tuple.Create(2, "Bob", false);
+        // Access tuple items
+        Console.WriteLine($"Person 1: ID={person.Item1}, Name={person.Item2}, IsActive={person.Item3}");
+        Console.WriteLine($"Person 2: ID={person2.Item1}, Name={person2.Item2}, IsActive={person2.Item3}");
+        // Compare tuples
+        var areEqual = person.Equals(person2);
+        Console.WriteLine($"Are Person 1 and Person 2 equal? {areEqual}");
+        // Tuple with more than 7 items using TRest
+        var complexTuple = Tuple.Create(1, "A", true, 3.14, 'c', 100L, (byte)255, Tuple.Create("Nested", 42));
+        // Access nested tuple
+        Console.WriteLine($"Complex Tuple: Item8.Item1={complexTuple.Rest.Item1.Item1}, Item8.Item2={complexTuple.Rest.Item1.Item2}");
+        /*
+         ⚠️ Note: Item names are always Item1, Item2, … (not very descriptive).
+         👉 That’s why ValueTuple (with named fields) is often preferred.
+         */
     }
 }
