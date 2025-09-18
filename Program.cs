@@ -1,63 +1,53 @@
-﻿//SortedList
+﻿//SortedDictionary
 /*
  
-A SortedList<TKey, TValue> is like a Dictionary, but it automatically keeps keys sorted.
+A SortedDictionary<TKey, TValue> is like a normal Dictionary, but it automatically sorts elements by key.
 
-It combines features of:
+Internally, it uses a balanced binary search tree (Red-Black tree) → optimized for frequent insertions/removals.
 
-Dictionary<TKey, TValue> → fast lookup by key
-
-List<T> → access by index
-
-So you can:
-
-Access by key (like Dictionary)
-
-Access by index position (like List)
+Unlike SortedList, it does not allow index-based access (you can’t say myDict[0]).
 
  */
 class Program
 {
     static void Main(string[] args)
     {
-        // Create a SortedList
-        SortedList<int, string> students = new SortedList<int, string>(); 
-        students.Add(1 , "John");
-        students.Add(3, "Jane");
-        students.Add(2, "Jake");
-        // Sorted automatically: [1:John, 2:Jake, 3:Jane]
-        // Access by key
-        Console.WriteLine(students[2]); // Output: Jake
-        // Access by index
-        Console.WriteLine(students.Values[0]); // Output: John
-        // Iterate in sorted order
-        foreach (var kvp in students)
+        // Create a SortedDictionary
+        SortedDictionary<int, string> users = new SortedDictionary<int, string>();
+        // Add elements
+        users.Add(3, "Alice");
+        users.Add(1, "Bob");
+        users.Add(2, "Charlie");
+        // Display elements (automatically sorted by key)
+        // Indexer access
+        Console.WriteLine(users[2]); // Output: Charlie
+        users[2] = "Alicia";
+        // Check if a key exists
+        if (users.ContainsKey(1))
         {
-            Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+            Console.WriteLine("Key 1 exists.");
         }
-        // Check existence of a key
-        if (students.ContainsKey(3))
+        // Check if a value exists
+        if (users.ContainsValue("Bob"))
         {
-            Console.WriteLine("Key 3 exists.");
+            Console.WriteLine("Value 'Bob' exists.");
         }
-        // Check existnece of a value 
-        if (students.ContainsValue("Jane"))
+        // Iterate through elements
+        foreach(var kvp in users)
         {
-            Console.WriteLine("Value 'Jane' exists.");
+            Console.WriteLine($"Key: {kvp.Key}, Value: {kvp.Value}");
         }
-        // Get index of a key
-        int index = students.IndexOfKey(2);
-        Console.WriteLine($"Index of key 2: {index}"); // Output: 1
-        // Get index of a value
-        index = students.IndexOfValue("Jane");
-        Console.WriteLine($"Index of value 'Jane': {index}"); // Output: 2
-        // Remove by key
-        students.Remove(1); // Removes John
-        // Remove by index
-        students.RemoveAt(0); // Removes Jake (now at index 0)
-        // Count
-        Console.WriteLine($"Count: {students.Count}"); // Output: 1
-        // Clear all
-        students.Clear();
+        // Keys & Values
+         foreach (var key in users.Keys)
+            Console.WriteLine(key);
+
+        foreach (var value in users.Values)
+            Console.WriteLine(value);
+        // Remove an element
+        users.Remove(3);
+        // Count elements
+        Console.WriteLine($"Total users: {users.Count}");
+        // Clear all elements
+        users.Clear();
     }
 }
