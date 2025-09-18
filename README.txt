@@ -1,35 +1,17 @@
-﻿✅ When to Use SortedDictionary in Web Apps
+﻿When to Use Hashtable in Web Applications
 
-You need data sorted by keys automatically
+⚠️ Nowadays, rarely used → replaced by Dictionary<TKey, TValue> (type-safe, faster, generic).
 
-Unlike Dictionary, a SortedDictionary keeps its elements sorted based on the keys.
+Might still appear in:
 
-Example: Storing usernames alphabetically → "Adam", "Ben", "Charlie" …
+Legacy .NET applications (pre-2.0).
 
-Efficient insertions + lookups with sorted order
+When you don’t know key/value types at compile time (very dynamic data).
 
-SortedDictionary uses a balanced tree (O(log n) for add, remove, lookup).
+Example: storing HTTP headers or session variables dynamically (but today Dictionary is preferred).
 
-If your app frequently inserts/deletes and still needs sorted order, this is better than SortedList.
+👉 In modern web apps, I’d recommend:
 
-Use cases in web applications
+Use Dictionary<TKey, TValue> instead of Hashtable.
 
-Leaderboard systems → Players ranked by score (sorted by key = score).
-
-Tagging/Labels → Organizing blog tags alphabetically.
-
-Caching with priority → Keeping cache entries sorted by key (e.g., timestamp).
-
-Search/filter suggestions → Showing options in order (e.g., auto-complete sorted by name).
-
-⚖️ Difference from SortedList in web apps
-
-SortedList → Better when you have a small, mostly read-only dataset (faster lookups).
-
-SortedDictionary → Better when you have a large, dynamic dataset with frequent updates.
-
-👉 So in a web app:
-
-Use Dictionary for raw fast lookups.
-
-Use SortedDictionary when you need both fast lookups + dynamic sorted order.
+Only use Hashtable if you’re maintaining old legacy code.
