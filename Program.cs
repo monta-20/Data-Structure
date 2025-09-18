@@ -1,16 +1,16 @@
-﻿//Tuple
+﻿//ValueTuple
 /*
-A data structure that holds a fixed number of items (can be different types).
+Introduced in C# 7.0 (System.ValueTuple namespace).
 
-Belongs to System.
+A lightweight, value-type tuple (faster than reference-type Tuple).
 
-Immutable → once created, you can’t change its values.
+Can hold multiple items of different types.
 
-Supports up to 8 items (Tuple<T1, T2, ..., T7, TRest>).
+Supports naming fields (unlike classic Tuple’s Item1, Item2...).
 
-Introduced before ValueTuple (C# 7.0), which is lighter and more common today.
+Immutable by default.
 
-👉 Think of it like a container for grouping values without creating a class.
+👉 Think of it as the modern way to return multiple values or group data quickly.
 */
 using System.Collections;
 
@@ -18,23 +18,33 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Create a tuple using constructor
-        Tuple<int, string, bool> person = new Tuple<int, string, bool>(1, "Alice", true);
-        // Create a tuple using Create method
-        var person2 = Tuple.Create(2, "Bob", false);
-        // Access tuple items
-        Console.WriteLine($"Person 1: ID={person.Item1}, Name={person.Item2}, IsActive={person.Item3}");
-        Console.WriteLine($"Person 2: ID={person2.Item1}, Name={person2.Item2}, IsActive={person2.Item3}");
-        // Compare tuples
-        var areEqual = person.Equals(person2);
-        Console.WriteLine($"Are Person 1 and Person 2 equal? {areEqual}");
-        // Tuple with more than 7 items using TRest
-        var complexTuple = Tuple.Create(1, "A", true, 3.14, 'c', 100L, (byte)255, Tuple.Create("Nested", 42));
-        // Access nested tuple
-        Console.WriteLine($"Complex Tuple: Item8.Item1={complexTuple.Rest.Item1.Item1}, Item8.Item2={complexTuple.Rest.Item1.Item2}");
-        /*
-         ⚠️ Note: Item names are always Item1, Item2, … (not very descriptive).
-         👉 That’s why ValueTuple (with named fields) is often preferred.
-         */
+        // Basic
+        var user = (1, "Montassar");
+        // With explicit types
+        ValueTuple<int, string> product = (101, "Laptop");
+        // With field names
+        (var id, var name) = (1, "Ben Brahim");
+        // Or named directly
+        var employee = (Id: 200, Name: "Ali", Salary: 3500.75);
+
+        // Without names
+        Console.WriteLine(user.Item1); // 1
+        Console.WriteLine(user.Item2); // Montassar
+        // With names
+        Console.WriteLine(employee.Id);    // 200
+        Console.WriteLine(employee.Name);  // Ali
+        Console.WriteLine(employee.Salary); // 3500.75
+        // Deconstruction
+        var (empId, empName, empSalary) = employee;
+        Console.WriteLine($"{empId} - {empName} - {empSalary}");
+        // Nested
+        var order = (OrderId: 5001, Product: (ProductId: 101, ProductName: "Laptop"), Quantity: 2);
+        Console.WriteLine(order.Product.ProductName); // Laptop
+        // Comparison
+        var tuple1 = (1, "Alice");
+        var tuple2 = (1, "Alice");
+        Console.WriteLine(tuple1 == tuple2); // True
+        // Immutability
+        // tuple1.Item1 = 2; // Error: Cannot modify
     }
 }
