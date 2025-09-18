@@ -1,50 +1,45 @@
-﻿//Stack
-//A stack is a collection that follows the LIFO principle (Last In, First Out)
-using Training_console;
-
+﻿//Queue
+//A Queue is a FIFO (First-In, First-Out) collection
+//Think of it like a line at the supermarket → the first person to enter is the first person to leave
 class Program
 {
     static void Main(string[] args)
     {
-        // Create a stack of integers
-        Stack<int> stack = new Stack<int>();
-        // Create a stack with initial values
-        Stack<int> initialStack = new Stack<int>(new int[] { 1, 2, 3, 4, 5, });
-        // Push elements onto the stack 
-        stack.Push(1);
-        stack.Push(2);
-        // Count the number of elements in the stack
-        Console.WriteLine("Count: " + stack.Count);
-        // Peek at the top element without removing it
-        Console.WriteLine("Top element: " + stack.Peek());
-        // Pop elements from the stack
-        Console.WriteLine("Popped element: " + stack.Pop());
-        // Check if the stack contains a specific element
-        Console.WriteLine("Contains 1: " + stack.Contains(1));
-        // Traverse the stack
-        foreach(int item in stack)
+        // Declare a Queue of strings
+        Queue<string> queue = new Queue<string>();
+        // Declare a Queue with initial values
+        Queue<string> queue2 = new Queue<string>(new[] { "Alice", "Bob", "Charlie" });
+        // Add elements to the Queue
+        queue.Enqueue("Alice");
+        queue.Enqueue("Bob");
+        queue.Enqueue("Charlie");
+        // Remove and return the front element
+        string front = queue.Dequeue();
+        Console.WriteLine("Dequeued: " + front);
+        // Peek at the front element without removing it
+        string peek = queue.Peek();
+        Console.WriteLine("Front element: " + peek);
+        // Check the number of elements in the Queue
+        int count = queue.Count;
+        Console.WriteLine("Queue count: " + count);
+        // Check if the Queue contains a specific element
+        bool containsBob = queue.Contains("Bob");
+        Console.WriteLine("Contains Bob: " + containsBob);
+        // Traverse the Queue
+        Console.WriteLine("Queue elements:");
+        foreach (var item in queue)
         {
             Console.WriteLine(item);
         }
-        // Set the capacity of the stack
-        // Useful when you know no more elements will be added to the stack, and you want to minimize memory overhead
-        stack.TrimExcess();
-        // Coping the stack to an array (in LIFO order)
-        int[] array = stack.ToArray();
-        // Clear the stack
-        stack.Clear();
+        // Copie the Queue to an array
+        string[] array = queue.ToArray();
+        // Clear the Queue
+        queue.Clear();
+        Console.WriteLine("Queue cleared. Count: " + queue.Count);
+           //Real - life use case:
 
-        // When using stack 
-        // 1. Use stack when you need to reverse the order of elements or when you need to backtrack (e.g., in algorithms like depth-first search).
-        // 2. Avoid using stack when you need random access to elements or when you need to frequently search for elements, as stacks do not support these operations efficiently.
-        // 3. Undo/Redo in editors (last action undone first).
-        // 4. Browser back/ forward navigation.
-        // I will this cas 
-        Browser browser = new Browser();
-        browser.Visit("page1.com");
-        browser.Visit("page2.com");
-        browser.Back(); // goes back to page1.com
-        browser.Forward(); // goes forward to page2.com
-        browser.Visit("page3.com"); // visits a new page, forward history is cleared
+                //Printer queue 🖨️ → first document sent gets printed first.
+                
+               //Customer service system → first customer enters, first served.
     }
 }
