@@ -1,127 +1,150 @@
-﻿--- Binary Search Tree (BST)
-🔹 What is a Binary Search Tree?
+﻿-- AVL Tree
+🔹 Qu’est-ce qu’un AVL Tree ?
 
-A Binary Search Tree (BST) is a special kind of binary tree with the following rules:
+Un AVL Tree est un Binary Search Tree avec une propriété supplémentaire :
 
-Each node has at most two children (left and right).
+Pour chaque nœud, la différence de hauteur entre son sous-arbre gauche et son sous-arbre droit est au maximum 1.
 
-For every node:
+Formellement :
 
-All nodes in the left subtree have values smaller than the node.
+BalanceFactor = height(left subtree) - height(right subtree)
 
-All nodes in the right subtree have values larger than the node.
 
-No duplicates (usually).
+BalanceFactor ∈ {-1, 0, 1}
 
-📌 This property makes searching and inserting very efficient.
+Si le facteur est en dehors de cette plage, on fait une rotation pour équilibrer l’arbre.
 
-🔹 Example BST
+✅ Cela garantit que les opérations (insertion, suppression, recherche) restent O(log n) même dans le pire des cas.
 
-Let’s build a BST by inserting numbers:
+🔹 Rotations en AVL Tree
 
-Insert in this order: 50, 30, 70, 20, 40, 60, 80
-ç
-        50
-       /  \
-     30    70
-    / \    / \
-  20  40  60  80
+Pour maintenir l’équilibre, on utilise 4 types de rotations :
 
-🔹 Operations on BST
-1. Search
+Left Rotation (Rotation à gauche)
+Pour corriger un déséquilibre Right-Right (RR).
 
-Start from root.
+   y                         x
+    \                       / \
+     x        →           y   T3
+      \
+       T3
 
-If the value is smaller → go left.
 
-If larger → go right.
+Right Rotation (Rotation à droite)
+Pour corriger un déséquilibre Left-Left (LL).
 
-If equal → found.
+       y                   x
+      /                   / \
+     x      →           T1   y
+    /
+   T1
 
-Example: Search for 40
 
-50 → go left (30).
+Left-Right Rotation (LR)
+Cas où la branche gauche du nœud est trop profonde à droite.
+→ D’abord rotation à gauche sur le fils gauche, puis rotation à droite sur le parent.
 
-30 → go right (40). ✅ Found.
+Right-Left Rotation (RL)
+Cas où la branche droite du nœud est trop profonde à gauche.
+→ D’abord rotation à droite sur le fils droit, puis rotation à gauche sur le parent.
 
-2. Insert
+🔹 Propriétés
+Propriété	AVL Tree
+Type	BST auto-équilibré
+Hauteur	O(log n)
+Recherche	O(log n)
+Insertion	O(log n)
+Suppression	O(log n)
+Utilisation	Base de données, index, systèmes où l’accès rapide est crucial
+🔹 Différence avec un BST simple
 
-Similar to search, but instead of stopping when the value is not found, insert it there.
+BST simple peut devenir déséquilibré (ex. insérer 1,2,3,4,5 → arbre devient une liste → O(n) recherche).
 
-Example: Insert 25
+AVL restructure automatiquement l’arbre après chaque insertion/suppression.
 
-50 → go left (30).
+Link for more info : https://www.w3schools.com/dsa/dsa_data_avltrees.php
 
-30 → go left (20).
+-- Red Black Tree
 
-20 → go right (null) → Insert 25 here.
+🔹 Qu’est-ce qu’un Red-Black Tree ?
 
-3. Traversals
+Un Red-Black Tree est un Binary Search Tree (BST) où chaque nœud possède une couleur : rouge (Red) ou noir (Black).
+Cette coloration permet de garantir que l’arbre reste approximativement équilibré après insertion et suppression.
 
-Traversal means visiting nodes in a certain order:
+🔹 Propriétés principales
 
-InOrder (Left, Root, Right)
+Un RBT doit toujours respecter 5 règles :
 
-Produces sorted order of values.
+Chaque nœud est soit rouge, soit noir.
 
-For above tree → 20, 30, 40, 50, 60, 70, 80
+La racine est toujours noire.
 
-PreOrder (Root, Left, Right)
+Toutes les feuilles nulles (NIL) sont noires.
 
-Used to copy or serialize a tree.
+Si un nœud est rouge, alors ses deux enfants sont noirs.
+→ Pas de deux rouges consécutifs.
 
-→ 50, 30, 20, 40, 70, 60, 80
+Tout chemin de la racine à une feuille NIL contient le même nombre de nœuds noirs.
+→ On appelle cela le Black Height.
 
-PostOrder (Left, Right, Root)
+🔹 Pourquoi c’est utile ?
 
-Used to delete a tree.
+Contrairement à l’AVL Tree, les rotations sont moins fréquentes, car RBT tolère un déséquilibre léger.
 
-→ 20, 40, 30, 60, 80, 70, 50
+Les opérations restent O(log n) : insertion, suppression, recherche.
 
-4. Delete
+Très utilisé dans :
 
-Deleting a node is trickier:
+Java TreeMap / TreeSet
 
-Case 1: Node has no children (leaf) → Just remove it.
+C++ std::map / std::set
 
-Case 2: Node has one child → Replace node with its child.
+Systèmes de fichiers
 
-Case 3: Node has two children → Replace with the smallest value in right subtree (inorder successor) or largest in left subtree (inorder predecessor).
+Bases de données (indexation)
 
-Example: Delete 50
+🔹 Rotations et recolorations
 
-Replace with 60 (smallest in right subtree).
+Comme l’AVL Tree, l’arbre peut devenir déséquilibré après une insertion ou suppression, et on utilise :
 
-🔹 Complexity of BST
+Rotations
 
-Best / Average Case (Balanced tree):
+Left Rotation (gauche)
 
-Search: O(log n)
+Right Rotation (droite)
 
-Insert: O(log n)
+Recoloration
 
-Delete: O(log n)
+On change la couleur des nœuds pour restaurer les propriétés du RBT.
 
-Worst Case (Unbalanced tree, like a linked list):
+🔹 Exemple d’insertion
 
-Search: O(n)
+Insertion de 10, 20, 30 :
 
-Insert: O(n)
+Insérer 10 → racine → noir
 
-Delete: O(n)
+Insérer 20 → rouge → aucun problème
 
-👉 That’s why we sometimes use balanced BSTs (like AVL Tree or Red-Black Tree) to guarantee efficiency.
+Insérer 30 → rouge → parent 20 rouge → violation de la règle 4 → rotation gauche sur 10 + recoloration
 
-🔹 When to Use BST in Real Life?
+Avant rotation :
+   10(B)
+      \
+      20(R)
+         \
+         30(R)
 
-Databases / Indexing → Efficient searching & sorting.
+Après rotation gauche et recoloration :
+      20(B)
+     /   \
+  10(R) 30(R)
 
-Autocomplete features → Store dictionary words in BST.
+🔹 Différence entre AVL et Red-Black Tree
+Caractéristique	            AVL Tree	                                         Red-Black Tree
+Équilibrage	Strict (hauteur max diff ≤1)	                          Relatif (via couleurs)
+Rotations	Plus fréquentes	                                          Moins fréquentes
+Recherche	O(log n)	                                              O(log n)
+Insertion	Plus coûteuse si rotations fréquentes	                  Plus rapide
+Cas d’usage	Accès très rapide, lecture fréquente	                  Lecture/écriture équilibrée, structures STL et Java
 
-Search engines → Indexing data.
-
-Compilers → Managing symbol tables.
-
-File systems → Organizing files by keys.
-
--- Link for more info : https://www.w3schools.com/dsa/dsa_data_binarysearchtrees.php
+For more info : https://www.geeksforgeeks.org/dsa/introduction-to-red-black-tree/

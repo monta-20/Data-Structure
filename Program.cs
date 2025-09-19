@@ -1,10 +1,14 @@
-﻿//Binary Search Tree
+﻿//Balanced Trees
 /*
-A BST is a binary tree with this property:
+N-ary Tree
 
-Left child < Parent < Right child.
+Each node can have N children.
 
-It allows fast searching, insertion, and deletion (average time O(log n)).
+Useful for menu structures, file systems, or organizational charts.
+
+Balanced Trees (AVL, Red-Black Tree)
+
+Self-balancing trees to maintain O(log n) operations.
 */
 using System.Collections;
 using Training_console;
