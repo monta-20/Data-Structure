@@ -1,38 +1,10 @@
-﻿//Tree
+﻿//Binary Search Tree
 /*
-🔹What is a Tree?
+A BST is a binary tree with this property:
 
-A tree is a hierarchical data structure consisting of nodes.
+Left child < Parent < Right child.
 
-Each node contains data and references to child nodes.
-
-The topmost node is called the root.
-
-Nodes with no children are called leaves.
-
-Trees are used when data has a hierarchical relationship.
-
-🔹Types of Trees
-
-Binary Tree
-
-Each node has at most 2 children (left and right).
-
-Binary Search Tree (BST)
-
-A binary tree where left child < parent < right child.
-
-Enables fast search, insertion, and deletion (O(log n) average).
-
-N-ary Tree
-
-Each node can have N children.
-
-Useful for menu structures, file systems, or organizational charts.
-
-Balanced Trees (AVL, Red-Black Tree)
-
-Self-balancing trees to maintain O(log n) operations.
+It allows fast searching, insertion, and deletion (average time O(log n)).
 */
 using System.Collections;
 using Training_console;
@@ -41,25 +13,44 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Bianry tree Define a Node class
-        Node root = new Node('R');
-        Node nodeA = new Node('A');
-        Node nodeB = new Node('B');
-        Node nodeC = new Node('C');
-        Node nodeD = new Node('D');
-        Node nodeE = new Node('E');
-        Node nodeF = new Node('F');
-        Node nodeG = new Node('G');
-        Node nodeH = new Node('H');
-        root.left = nodeA; 
-        root.right = nodeB;
-        nodeA.left = nodeC;
-        nodeA.right = nodeD;
-        nodeB.left = nodeE;
-        nodeB.right = nodeF;
-        nodeC.left = nodeG;
-        nodeC.right = nodeH;
-        // Traversal
-        Console.WriteLine("root.right.right " + root.right.right.data);
+        BinarySearchTree bst = new BinarySearchTree();
+
+        // Insertion
+        bst.Insert(50);
+        bst.Insert(30);
+        bst.Insert(20);
+        bst.Insert(40);
+        bst.Insert(70);
+        bst.Insert(60);
+        bst.Insert(80);
+
+        // Parcours InOrder (affiche trié)
+        Console.WriteLine("InOrder Traversal:");
+        bst.InOrder(bst.Root);
+        Console.WriteLine();
+
+        // Recherche
+        Console.WriteLine("Search 25: " + (bst.Search(25) ? "Found" : "Not Found"));
+        Console.WriteLine("Search 70: " + (bst.Search(70) ? "Found" : "Not Found"));
+
+        // Parcours PreOrder
+        Console.WriteLine("PreOrder Traversal:");
+        bst.PreOrder(bst.Root);
+        Console.WriteLine();
+
+        // Parcours PostOrder
+        Console.WriteLine("PostOrder Traversal:");
+        bst.PostOrder(bst.Root);
+        Console.WriteLine();
+
+        // Suppression
+        Console.WriteLine("Delete 20:");
+        bst.Delete(20);
+
+        // Nouveau parcours après suppression
+        Console.WriteLine("InOrder Traversal after deletion:");
+        bst.InOrder(bst.Root);
+        Console.WriteLine();
     }
+
 }

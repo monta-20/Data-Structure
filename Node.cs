@@ -8,12 +8,12 @@ namespace Training_console
 {
     public class Node
     {
-        public char data;
+        public int value;
         public Node right;
         public Node left;
-        public Node(char value)
+        public Node(int value)
         {
-            this.data = value;
+            this.value = value;
             this.right = this.left = null;            
         }
     }
