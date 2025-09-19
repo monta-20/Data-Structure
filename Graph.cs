@@ -19,29 +19,37 @@ namespace Training_console
                 adj[i] = new List<int>();
             }
         }
-        // Add an edge to the graph
-        public void AddEdge(int v , int w , bool directed = false)
+        // Undirectionned graph
+        public void AddEdge(int v , int w )
         {
             adj[v].Add(w);
-            if(!directed)
-            {
-                adj[w].Add(v);
-            }
+            adj[w].Add(v);
         }
 
-        // Print the graph
-        public void PrintGraph()
+        // BFS Traversal
+        public void BFS(int start)
         {
-            Console.WriteLine("Graph Adjacency List:");
-            for (int i = 0; i < V; i++)
+            bool[] visited = new bool[V]; 
+            Queue<int> queue = new Queue<int>();
+            visited[start] = true;
+            queue.Enqueue(start);
+
+            Console.WriteLine("BFS Starting from node " + start + ":");
+
+            while(queue.Count > 0)
             {
-                Console.Write(i + " -> ");
-                foreach (var neighbor in adj[i])
+                int node = queue.Dequeue();
+                Console.Write(node + " ");
+                foreach (var neighbor in adj[node])
                 {
-                    Console.Write(neighbor + " ");
+                    if (!visited[neighbor])
+                    {
+                        visited[neighbor] = true;
+                        queue.Enqueue(neighbor);
+                    }
                 }
-                Console.WriteLine();
             }
+            Console.WriteLine();
         }
     }
 }
