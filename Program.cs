@@ -1,4 +1,4 @@
-﻿//Balanced Trees
+﻿//Graphs
 /*
 N-ary Tree
 
@@ -10,51 +10,32 @@ Balanced Trees (AVL, Red-Black Tree)
 
 Self-balancing trees to maintain O(log n) operations.
 */
-using System.Collections;
 using Training_console;
 
 class Program
 {
     static void Main(string[] args)
     {
-        BinarySearchTree bst = new BinarySearchTree();
+        // Create a graph with 5 vertices (0, 1, 2, 3, 4)
+        Graph g = new Graph(5);
 
-        // Insertion
-        bst.Insert(50);
-        bst.Insert(30);
-        bst.Insert(20);
-        bst.Insert(40);
-        bst.Insert(70);
-        bst.Insert(60);
-        bst.Insert(80);
+        // Add edges
+        g.AddEdge(0, 1);
+        g.AddEdge(0, 4);
+        g.AddEdge(1, 2);
+        g.AddEdge(1, 3);
+        g.AddEdge(1, 4);
+        g.AddEdge(2, 3);
+        g.AddEdge(3, 4);
 
-        // Parcours InOrder (affiche trié)
-        Console.WriteLine("InOrder Traversal:");
-        bst.InOrder(bst.Root);
-        Console.WriteLine();
+        // Print the graph
+        g.PrintGraph();
 
-        // Recherche
-        Console.WriteLine("Search 25: " + (bst.Search(25) ? "Found" : "Not Found"));
-        Console.WriteLine("Search 70: " + (bst.Search(70) ? "Found" : "Not Found"));
-
-        // Parcours PreOrder
-        Console.WriteLine("PreOrder Traversal:");
-        bst.PreOrder(bst.Root);
-        Console.WriteLine();
-
-        // Parcours PostOrder
-        Console.WriteLine("PostOrder Traversal:");
-        bst.PostOrder(bst.Root);
-        Console.WriteLine();
-
-        // Suppression
-        Console.WriteLine("Delete 20:");
-        bst.Delete(20);
-
-        // Nouveau parcours après suppression
-        Console.WriteLine("InOrder Traversal after deletion:");
-        bst.InOrder(bst.Root);
-        Console.WriteLine();
+        Console.WriteLine("   (0)------(1)  ");
+        Console.WriteLine("    | \\     / |  ");
+        Console.WriteLine("    |  \\   /  |  ");
+        Console.WriteLine("    |   (4)   |  ");
+        Console.WriteLine("    |  /   \\  |  ");
+        Console.WriteLine("   (2)------(3)  ");
     }
-
 }

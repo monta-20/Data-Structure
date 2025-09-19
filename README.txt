@@ -1,150 +1,120 @@
-﻿-- AVL Tree
-🔹 Qu’est-ce qu’un AVL Tree ?
+﻿🔹 What is a Graph?
 
-Un AVL Tree est un Binary Search Tree avec une propriété supplémentaire :
+A graph is a data structure that consists of:
 
-Pour chaque nœud, la différence de hauteur entre son sous-arbre gauche et son sous-arbre droit est au maximum 1.
+Vertices (nodes): the entities in the graph
 
-Formellement :
+Edges (links): connections between the vertices
 
-BalanceFactor = height(left subtree) - height(right subtree)
+Formally:
 
-
-BalanceFactor ∈ {-1, 0, 1}
-
-Si le facteur est en dehors de cette plage, on fait une rotation pour équilibrer l’arbre.
-
-✅ Cela garantit que les opérations (insertion, suppression, recherche) restent O(log n) même dans le pire des cas.
-
-🔹 Rotations en AVL Tree
-
-Pour maintenir l’équilibre, on utilise 4 types de rotations :
-
-Left Rotation (Rotation à gauche)
-Pour corriger un déséquilibre Right-Right (RR).
-
-   y                         x
-    \                       / \
-     x        →           y   T3
-      \
-       T3
+G = (V, E)
+V = set of vertices
+E = set of edges
 
 
-Right Rotation (Rotation à droite)
-Pour corriger un déséquilibre Left-Left (LL).
+Edges can be directed or undirected, and they may have weights or not.
 
-       y                   x
-      /                   / \
-     x      →           T1   y
-    /
-   T1
+🔹 Types of Graphs
 
+Directed Graph (Digraph)
 
-Left-Right Rotation (LR)
-Cas où la branche gauche du nœud est trop profonde à droite.
-→ D’abord rotation à gauche sur le fils gauche, puis rotation à droite sur le parent.
+Edges have a direction: A → B
 
-Right-Left Rotation (RL)
-Cas où la branche droite du nœud est trop profonde à gauche.
-→ D’abord rotation à droite sur le fils droit, puis rotation à gauche sur le parent.
+Example: Twitter followers (A follows B, not necessarily vice versa)
 
-🔹 Propriétés
-Propriété	AVL Tree
-Type	BST auto-équilibré
-Hauteur	O(log n)
-Recherche	O(log n)
-Insertion	O(log n)
-Suppression	O(log n)
-Utilisation	Base de données, index, systèmes où l’accès rapide est crucial
-🔹 Différence avec un BST simple
+Undirected Graph
 
-BST simple peut devenir déséquilibré (ex. insérer 1,2,3,4,5 → arbre devient une liste → O(n) recherche).
+Edges have no direction: A — B
 
-AVL restructure automatiquement l’arbre après chaque insertion/suppression.
+Example: Facebook friends (friendship is mutual)
 
-Link for more info : https://www.w3schools.com/dsa/dsa_data_avltrees.php
+Weighted Graph
 
--- Red Black Tree
+Each edge has a weight (cost, distance, time)
 
-🔹 Qu’est-ce qu’un Red-Black Tree ?
+Example: Road networks (distance between cities)
 
-Un Red-Black Tree est un Binary Search Tree (BST) où chaque nœud possède une couleur : rouge (Red) ou noir (Black).
-Cette coloration permet de garantir que l’arbre reste approximativement équilibré après insertion et suppression.
+Unweighted Graph
 
-🔹 Propriétés principales
+Edges have no weight, just a connection
 
-Un RBT doit toujours respecter 5 règles :
+Cyclic Graph
 
-Chaque nœud est soit rouge, soit noir.
+Contains at least one cycle (a path that starts and ends at the same vertex)
 
-La racine est toujours noire.
+Acyclic Graph
 
-Toutes les feuilles nulles (NIL) sont noires.
+No cycles
 
-Si un nœud est rouge, alors ses deux enfants sont noirs.
-→ Pas de deux rouges consécutifs.
+Example: Trees
 
-Tout chemin de la racine à une feuille NIL contient le même nombre de nœuds noirs.
-→ On appelle cela le Black Height.
+Connected Graph (for undirected graphs)
 
-🔹 Pourquoi c’est utile ?
+Every vertex can be reached from any other vertex
 
-Contrairement à l’AVL Tree, les rotations sont moins fréquentes, car RBT tolère un déséquilibre léger.
+Strongly Connected Graph (for directed graphs)
 
-Les opérations restent O(log n) : insertion, suppression, recherche.
+There is a path from every vertex to every other vertex
 
-Très utilisé dans :
+Bipartite Graph
 
-Java TreeMap / TreeSet
+Vertices can be split into two disjoint sets
 
-C++ std::map / std::set
+No edge connects vertices of the same set
 
-Systèmes de fichiers
+🔹 Properties of a Graph
 
-Bases de données (indexation)
+Number of vertices (|V|) – the total count of nodes
 
-🔹 Rotations et recolorations
+Number of edges (|E|) – the total count of connections
 
-Comme l’AVL Tree, l’arbre peut devenir déséquilibré après une insertion ou suppression, et on utilise :
+Degree of a vertex
 
-Rotations
+For undirected graphs: number of edges connected to it
 
-Left Rotation (gauche)
+For directed graphs:
 
-Right Rotation (droite)
+In-degree: number of incoming edges
 
-Recoloration
+Out-degree: number of outgoing edges
 
-On change la couleur des nœuds pour restaurer les propriétés du RBT.
+Path – a sequence of vertices connected by edges
 
-🔹 Exemple d’insertion
+Cycle – a path that starts and ends at the same vertex
 
-Insertion de 10, 20, 30 :
+Connectedness – whether all vertices are reachable
 
-Insérer 10 → racine → noir
+Weighted / Unweighted – whether edges have costs
 
-Insérer 20 → rouge → aucun problème
+Directed / Undirected – whether edges have a direction
 
-Insérer 30 → rouge → parent 20 rouge → violation de la règle 4 → rotation gauche sur 10 + recoloration
+🔹 Representations of a Graph
 
-Avant rotation :
-   10(B)
-      \
-      20(R)
-         \
-         30(R)
+Adjacency List
 
-Après rotation gauche et recoloration :
-      20(B)
-     /   \
-  10(R) 30(R)
+For each vertex, maintain a list of its neighbors
 
-🔹 Différence entre AVL et Red-Black Tree
-Caractéristique	            AVL Tree	                                         Red-Black Tree
-Équilibrage	Strict (hauteur max diff ≤1)	                          Relatif (via couleurs)
-Rotations	Plus fréquentes	                                          Moins fréquentes
-Recherche	O(log n)	                                              O(log n)
-Insertion	Plus coûteuse si rotations fréquentes	                  Plus rapide
-Cas d’usage	Accès très rapide, lecture fréquente	                  Lecture/écriture équilibrée, structures STL et Java
+Memory-efficient for sparse graphs
 
-For more info : https://www.geeksforgeeks.org/dsa/introduction-to-red-black-tree/
+Adjacency Matrix
+
+2D array n x n
+
+matrix[i][j] = 1 if there is an edge between i and j, otherwise 0
+
+Faster to check if an edge exists
+
+🔹 Applications of Graphs
+
+Social networks (friends, followers)
+
+Road maps and GPS routing
+
+Search engines (PageRank algorithm)
+
+Scheduling and dependency management
+
+AI (game maps, pathfinding)
+
+For more info : https://www.datacamp.com/tutorial/introduction-to-graph-theory
