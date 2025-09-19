@@ -1,36 +1,65 @@
-﻿//BitArray
+﻿//Tree
 /*
-A collection of bits (0 or 1 / true or false).
+🔹What is a Tree?
 
-Belongs to System.Collections.
+A tree is a hierarchical data structure consisting of nodes.
 
-Internally, it stores bits efficiently instead of using a full bool[] array.
+Each node contains data and references to child nodes.
 
-Mutable → you can set, clear, or toggle bits.
+The topmost node is called the root.
 
-Supports bitwise operations like AND, OR, XOR, NOT.
+Nodes with no children are called leaves.
+
+Trees are used when data has a hierarchical relationship.
+
+🔹Types of Trees
+
+Binary Tree
+
+Each node has at most 2 children (left and right).
+
+Binary Search Tree (BST)
+
+A binary tree where left child < parent < right child.
+
+Enables fast search, insertion, and deletion (O(log n) average).
+
+N-ary Tree
+
+Each node can have N children.
+
+Useful for menu structures, file systems, or organizational charts.
+
+Balanced Trees (AVL, Red-Black Tree)
+
+Self-balancing trees to maintain O(log n) operations.
 */
 using System.Collections;
+using Training_console;
 
 class Program
 {
     static void Main(string[] args)
     {
-        BitArray bitArray = new BitArray(8); // 8 bits initialized to false (0)
-        BitArray bitArray1 = new BitArray(8, true); // 8 bits initialized to true (1)
-        bool[] flags = { true, false, true }; // From bool array
-        BitArray bits1 = new BitArray(flags);
-        // From int array (each int = 32 bits)
-        int[] numbers = { 1, 2 };
-        BitArray bits2 = new BitArray(numbers); // 64 bits: 00000001 00000010
-
-        bits1[0] = true;   // set first bit
-        bool firstBit = bits1[0]; // read first bit
-
-        // Iterating
-        for (int i = 0; i < bits1.Count; i++)
-        {
-            Console.WriteLine(bits1[i]);
-        }
+        // Bianry tree Define a Node class
+        Node root = new Node('R');
+        Node nodeA = new Node('A');
+        Node nodeB = new Node('B');
+        Node nodeC = new Node('C');
+        Node nodeD = new Node('D');
+        Node nodeE = new Node('E');
+        Node nodeF = new Node('F');
+        Node nodeG = new Node('G');
+        Node nodeH = new Node('H');
+        root.left = nodeA; 
+        root.right = nodeB;
+        nodeA.left = nodeC;
+        nodeA.right = nodeD;
+        nodeB.left = nodeE;
+        nodeB.right = nodeF;
+        nodeC.left = nodeG;
+        nodeC.right = nodeH;
+        // Traversal
+        Console.WriteLine("root.right.right " + root.right.right.data);
     }
 }

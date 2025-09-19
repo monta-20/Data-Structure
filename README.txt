@@ -1,17 +1,53 @@
-﻿🔹 Common Methods & Operations
+﻿--- Binary Tree : 
+🔹 Types of Binary Trees
+1. Balanced Binary Tree
 
-And(BitArray) → bitwise AND.
+Definition: For every node, the height difference between the left and right subtree is at most 1.
 
-Or(BitArray) → bitwise OR.
+Ensures that the tree does not become skewed (like a linked list).
 
-Xor(BitArray) → bitwise XOR.
+Example: AVL Trees, Red-Black Trees.
 
-Not() → invert all bits.
+✅ Use case: Faster searches in databases or indexing systems because the tree stays balanced.
 
-Get(int index) → get value at index.
+2. Complete Binary Tree
 
-Set(int index, bool value) → set value at index.
+Definition: All levels are completely filled, except possibly the last level, which is filled from left to right.
 
-Length → number of bits.
+A complete binary tree is also balanced by definition.
 
-CopyTo(Array, int) → copy to array.
+✅ Use case: Heaps (used in Priority Queues) are complete binary trees.
+
+3. Full Binary Tree
+
+Definition: Every node has either 0 or 2 children.
+
+No node has only one child.
+
+✅ Use case: Useful in cases like decision trees, where each decision splits into exactly two possible outcomes.
+
+4. Perfect Binary Tree
+
+Definition:
+
+All internal nodes have exactly 2 children.
+
+All leaf nodes are at the same level.
+
+This means every level is completely filled.
+
+A perfect binary tree is also full, balanced, and complete.
+
+✅ Use case: Efficient memory representation, often used in network routing or hierarchical data structures.
+
+🔹 Visual Summary
+
+Balanced Tree: Keeps height difference ≤ 1.
+
+Complete Tree: All levels filled except possibly the last (left-to-right).
+
+Full Tree: Each node has 0 or 2 children.
+
+Perfect Tree: Full + Complete → All leaves at the same depth.
+
+-- Link for more info : https://www.w3schools.com/dsa/dsa_data_binarytrees.php
