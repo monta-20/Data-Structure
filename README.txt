@@ -1,13 +1,9 @@
-﻿🔹 BFS Algorithm Steps
+﻿🔹 DFS Algorithm (Recursive)
 
-Start from the source node.
+Start from a source node.
 
-Mark it as visited and add it to the queue.
+Mark it as visited.
 
-While the queue is not empty:
+Recursively visit all unvisited neighbors.
 
-Remove the first node from the queue.
-
-Visit all its unvisited neighbors, mark them as visited, and enqueue them.
-
-For more info : https://www.geeksforgeeks.org/dsa/breadth-first-search-or-bfs-for-a-graph/
+For more info : https://www.geeksforgeeks.org/dsa/depth-first-search-or-dfs-for-a-graph/

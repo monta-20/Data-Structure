@@ -26,30 +26,25 @@ namespace Training_console
             adj[w].Add(v);
         }
 
-        // BFS Traversal
-        public void BFS(int start)
+        // DFS Traversal
+        public void DFS(int start)
         {
             bool[] visited = new bool[V]; 
-            Queue<int> queue = new Queue<int>();
-            visited[start] = true;
-            queue.Enqueue(start);
-
-            Console.WriteLine("BFS Starting from node " + start + ":");
-
-            while(queue.Count > 0)
+            Console.WriteLine("DFS Starting from node " + start + ":");
+            DFSUtil(start, visited);
+            Console.WriteLine();
+        }
+        private void DFSUtil(int v, bool[] visited)
+        {
+            visited[v] = true;
+            Console.Write(v + " ");
+            foreach (var neighbor in adj[v])
             {
-                int node = queue.Dequeue();
-                Console.Write(node + " ");
-                foreach (var neighbor in adj[node])
+                if (!visited[neighbor])
                 {
-                    if (!visited[neighbor])
-                    {
-                        visited[neighbor] = true;
-                        queue.Enqueue(neighbor);
-                    }
+                    DFSUtil(neighbor, visited);
                 }
             }
-            Console.WriteLine();
         }
     }
 }

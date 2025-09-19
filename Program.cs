@@ -1,10 +1,14 @@
-﻿//BFS
+﻿//DFS
 /*
-BFS is a graph traversal algorithm.
+DFS explores a graph deeply before backtracking.
 
-It starts from a source node and explores all neighbors first (level by level) before moving to the next level.
+It starts from a source node, visits one neighbor, then goes deeper until no unvisited neighbors remain, then backtracks.
 
-It uses a Queue data structure.
+DFS can be implemented using:
+
+Recursion (easier, uses call stack)
+
+Explicit Stack (iterative version)
 */
 using Training_console;
 
@@ -19,6 +23,10 @@ class Program
         g.AddEdge(1, 4);
         g.AddEdge(2, 5);
 
-        g.BFS(0);
+        g.DFS(0);
+        /*
+         DFS Starting from node 0:
+         0 1 2 3 4 5
+         */
     }
 }
